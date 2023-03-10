@@ -1,5 +1,5 @@
 .container{
-    margin: 0;
+    margin-top: 10%;
     padding: 0;
     box-sizing: border-box;
     display: flex;
@@ -9,10 +9,7 @@
 
 .calc{
     padding: 5px;
-    /* background-color: cornflowerblue; */
     background-color: #f2f4f4;
-    /* height: 100px;
-    width: 100px; */
 }
 
 #screen{
@@ -50,7 +47,6 @@ button{
 
 .btn-deg, .btn-fe{
     width: 20%;
-    /* font-weight: 900; */
     background-color: #f2f4f6;
 }
 
