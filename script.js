@@ -17,6 +17,7 @@ buttons.forEach((item)=>{
         if(screen.value === "0"){
             screen.value = val;
         }else{
+            // restricts clicking multiple operator
             let lastChar = screen.value.charAt(screen.value.length - 1);
             let opr_arr = ["+", "-", "*", "/", "%", "."];
             if(opr_arr.includes(val) && opr_arr.includes(lastChar)){
@@ -48,6 +49,7 @@ function fixedToExp(){
     screen.value = Number(screen.value).toExponential();
 };
 
+// function to change set of operations when 2nd clicked
 function toggleOperations(){
     const col1 = document.getElementsByClassName("option1");
     const col2 = document.getElementsByClassName("option2");
@@ -69,10 +71,12 @@ function toggleOperations(){
     }
 };
 
+// flag to show trignometry clicked
 function trignometry(){
     trignometry_clicked = true;
 }
 
+// flag to show y root x, log x to base y clicked
 function func(){
     func_clicked = true;
 }
@@ -171,6 +175,7 @@ function equal(){
     }
 }
 
+// function for trignometry, y root x, log x to base y
 function adv_eval(){
     let expression = screen.value;
     if(trignometry_clicked || func_clicked){
@@ -231,6 +236,7 @@ function adv_eval(){
     }
 }
 
+// Memory functions
 function mc(){
     screen.value = "";
     localStorage.removeItem("memory");
