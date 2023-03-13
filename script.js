@@ -5,19 +5,44 @@ let trignometry_clicked = false;
 let func_clicked = false;
 let yroot_clicked = false;
 let logbase_clicked = false;
-let memory = 0;
 
 buttons.forEach((item)=>{
     item.addEventListener('click', (e) => {
         val = e.target.value;
+        if(item.id === "clear"){
+            document.getElementById("clear").innerText = "C";
+        }else{
+            document.getElementById("clear").innerText = "CE";
+        }
         if(screen.value === "0"){
             screen.value = val;
         }else{
-            screen.value += val;
+            let lastChar = screen.value.charAt(screen.value.length - 1);
+            let opr_arr = ["+", "-", "*", "/", "%", "."];
+            if(opr_arr.includes(val) && opr_arr.includes(lastChar)){
+                screen.value += "";
+            }else{
+                screen.value += val;
+            }
         }
         num = screen.value;
     });
 });
+
+function deg_rad(){
+    let mode = document.getElementById("deg_rad");
+    let val = screen.value;
+    if(mode.innerText === "DEG"){
+        mode.innerText = "RAD";
+	    screen.value = val * 0.0175;
+    }else if(mode.innerText === "RAD"){
+        mode.innerText = "GRAD";
+        screen.value = val * 63.662;
+    }else{
+        mode.innerText = "DEG";
+    	screen.value = val * 0.9;
+    }
+}
 
 function fixedToExp(){
     screen.value = Number(screen.value).toExponential();
@@ -207,29 +232,39 @@ function adv_eval(){
 }
 
 function mc(){
-    memory = "";
     screen.value = "";
-    console.log(memory);
+    localStorage.removeItem("memory");
+    var mc_element = document.getElementById("mc");
+    mc_element.classList.remove("fontWt");
+    mc_element.classList.add("btnDark");
+    var mr_element = document.getElementById("mr");
+    mr_element.classList.remove("fontWt");
+    mr_element.classList.add("btnDark");
 }
 
 function mr(){
-    screen.value = memory;
-    console.log(memory);
+    screen.value = localStorage.getItem("memory");
 }
 
 function m_plus(){
-    memory = memory + eval(screen.value);
-    screen.value = memory;
-    console.log(memory);
+    let memory = localStorage.getItem("memory");
+    memory = Number(memory) + eval(screen.value);
+    localStorage.setItem("memory", memory);
 }
 
 function m_minus(){
-    memory = memory - eval(screen.value);
-    screen.value = memory;
-    console.log(memory);
+    let memory = localStorage.getItem("memory");
+    memory = Number(memory) - eval(screen.value);
+    localStorage.setItem("memory", memory);
 }
 
 function ms(){
-    memory = eval(screen.value);
-    console.log(memory);
+    let memory = eval(screen.value);
+    localStorage.setItem("memory", memory);
+    var mc_element = document.getElementById("mc");
+    mc_element.classList.add("fontWt");
+    mc_element.classList.remove("btnDark");
+    var mr_element = document.getElementById("mr");
+    mr_element.classList.add("fontWt");
+    mr_element.classList.remove("btnDark");
 }
